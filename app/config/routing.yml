@@ -1,0 +1,29 @@
+paciente_paciente:
+    resource: "@PacienteBundle/Controller/PacienteController.php"
+    type:     annotation
+
+analisis_analisis:
+    resource: "@AnalisisBundle/Controller/AnalisisController.php"
+    type:     annotation
+
+analisis_analisis:
+    resource: "@AnalisisBundle/Controller/AnalisisController.php"
+    type:     annotation
+
+paciente_paciente:
+    resource: "@PacienteBundle/Controller/PacienteController.php"
+    type:     annotation
+
+analisis:
+    resource: "@AnalisisBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+paciente:
+    resource: "@PacienteBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
