@@ -1,49 +1,86 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Pacientes list</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Lastname</th>
-                <th>Age</th>
-                <th>Idnumber</th>
-                <th>Idtype</th>
-                <th>Observations</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for paciente in pacientes %}
-            <tr>
-                <td><a href="{{ path('paciente_show', { 'id': paciente.id }) }}">{{ paciente.id }}</a></td>
-                <td>{{ paciente.name }}</td>
-                <td>{{ paciente.lastName }}</td>
-                <td>{{ paciente.age }}</td>
-                <td>{{ paciente.idNumber }}</td>
-                <td>{{ paciente.idType }}</td>
-                <td>{{ paciente.observations }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('paciente_show', { 'id': paciente.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('paciente_edit', { 'id': paciente.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
+    <h1>Lista de Pacientes: </h1>
+<table class="dashboard-table">
+  <colgroup>
+    <col width="150">
+    <col width="80">
+    <col width="200">
+    <col width="60">
+    <col width="220">
+    <col width="170">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Nombre <i class="fa fa-caret-down"></i></th>
+      <th>Apellido <i class="fa fa-caret-down"></i></th>
+      <th>Edad <i class="fa fa-caret-down"></i></th>
+      <th>Numero de Id <i class="fa fa-caret-down"></i></th>
+      <th>Tipo de Id <i class="fa fa-caret-down"></i></th>
+      <th>Observaciones <i class="fa fa-caret-down"></i></th>
+      <th>Acciones <i class="fa fa-caret-down"></i></th>
+      <th>Analisis <i class="fa fa-caret-down"></i></th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+    {%for paciente in pacientes%}
+    <tr>
+      <td>
+        <div class="flex-container align-justify align-top">
+          <div class="flex-child-grow">
+            <h6 class="dashboard-table-text">{{paciente.name}}</h6>
+          </div>
+        </div>
+      </td>
+      <td>{{paciente.lastName}}</td>
+      <td class="bold">{{paciente.age}}</td>
+      <td>{{paciente.idNumber}}</td>
+      <td>
+        <div class="flex-container align-top">
+            <div class="flex-child">
+                <h6 class="dashboard-table-text">{{paciente.idType}}</h6>
+            </div>
+        </div>
+      </td>
+      <td class="listing-inquiry-status">
+      
+        <div class="flex-container align-top">
+            <div class="flex-child">
+                <h6 class="dashboard-table-text">{{paciente.observations}}</h6>
+            </div>
+        </div>
+      
+      </td>
+      
+        <td >
+            <div class="flex-container align-top">
+                <div class="flex-child">
+                    <h6 class="dashboard-table-text"><a href="{{path('paciente_delete',{id:paciente.getId()})}}">Borrar</a></h6>
+                    <h6 class="dashboard-table-text"><a href="{{path('paciente_edit',{id:paciente.getId()})}}">Editar</a></h6>
+                </div> 
+            </div>
+        </td>
+        {%for analisis in paciente.analisis%}
+        <td >
+            <div class="flex-container align-top">
+                <div class="flex-child">
+                {% if analisis is null %}
+                    <h6 class="dashboard-table-text">Sin Analisis</h6>
+                {%else%}
+                    <h6 class="dashboard-table-text">{{analisis.name}}</h6>
+                {%endif%}
+                </div>
+            </div>
+        </td>
+        {%endfor%}
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
         <li>
-            <a href="{{ path('paciente_new') }}">Create a new paciente</a>
+            <a href="{{ path('paciente_new') }}">Crear un nuevo paciente</a>
         </li>
     </ul>
 {% endblock %}

@@ -228,6 +228,11 @@ class Paciente implements \JsonSerializable
         return $this->observations;
     }
 
+    /**
+     * Get analisis
+     *
+     * @return ArrayCollection
+     */
     public function getAnalisis()
     {
         return $this->analisis;

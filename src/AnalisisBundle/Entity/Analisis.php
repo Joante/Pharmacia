@@ -73,9 +73,19 @@ class Analisis
     {
         return $this->name;
     }
+
+    /**
+     * Get pacientes
+     *
+     * @return ArrayCollection
+     */
     public function getPacientes()
     {
         return $this->pacientes;
+    }
+    public function __toString()
+    {
+        return $this->name;
     }
 }
 

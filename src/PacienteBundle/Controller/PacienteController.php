@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Paciente controller.
@@ -16,16 +17,51 @@ use Symfony\Component\HttpFoundation\Request;
 class PacienteController extends Controller
 {
     /**
+     *
+     * Busqueda
+     *
+     * @Route("/search" , name="busqueda")
+     * @Method("POST")
+     */
+    public function busqueda(Request $request)
+    {
+        $busqueda = $request->get('busqueda');
+            $repository = $this->getDoctrine()
+                ->getRepository('PacienteBundle:Paciente');
+
+            $query = $repository->createQueryBuilder('p')
+                ->where('p.name LIKE :nombre OR p.lastName LIKE :apellido OR p.idNumber=:idNumber')
+                ->setParameter('nombre', '%'.$busqueda.'%')
+                ->setParameter('apellido', '%'.$busqueda.'%')
+                ->setParameter('idNumber', $busqueda)
+                ->orderBy('p.name', 'ASC')
+                ->getQuery();
+            $pacientes = $query->getResult();
+            
+            $repository = $this->getDoctrine()
+                ->getRepository('AnalisisBundle:Analisis');
+
+            $query = $repository->createQueryBuilder('p')
+                ->where('p.name LIKE :nombre')
+                ->setParameter('nombre', '%'.$busqueda.'%')
+                ->orderBy('p.name', 'ASC')
+                ->getQuery();
+            $analisis = $query->getResult();
+            return $this->render('PacienteBundle:Default:busqueda.html.twig',['pacientes' => $pacientes,
+                                                                            'analisis' => $analisis]);
+            
+    }
+    /**
      * Lists all paciente entities.
      *
-     * @Route("/paciente/list", name="paciente_index")
+     * @Route("/list", name="paciente_index")
      * @Method("GET")
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $pacientes = $em->getRepository('PacienteBundle:Paciente')->findAll();
+        $pacientes = $this->getDoctrine()
+                 ->getRepository('PacienteBundle:Paciente')
+                 ->findAll();
 
         return $this->render('paciente/index.html.twig', array(
             'pacientes' => $pacientes,

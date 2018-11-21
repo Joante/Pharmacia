@@ -2,12 +2,152 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}Pharmacia{% endblock %}</title>
+        {% block stylesheets %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.3/motion-ui.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-prototype.min.css">
+        <link href='https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css' rel='stylesheet' type='text/css'>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <style type="text/css">
+        
+        .dashboard-table {
+          border-collapse: collapse;
+          margin-bottom: 0;
+        }
+
+        .dashboard-table td {
+          border-bottom: 1px dashed #d7d7d7;
+        }
+
+        .dashboard-table a {
+          color: #242424;
+        }
+
+        .dashboard-table .bold {
+          color: #0a0a0a;
+          font-weight: 600;
+        }
+
+        .dashboard-table thead {
+          background: none;
+          border: 0;
+          border-bottom: 1px solid #e6e6e6;
+          color: #8a8a8a;
+          font-size: 0.8rem;
+        }
+
+        .dashboard-table thead a {
+          color: #8a8a8a;
+        }
+
+        .dashboard-table tbody {
+          border: 1px solid #e1e1e1;
+          box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);
+        }
+
+        .dashboard-table tbody tr {
+          transition: all 0.5s ease;
+        }
+
+        .dashboard-table tbody tr:hover {
+          background: #fcf7da;
+          transition: all 0.5s ease;
+        }
+
+        .dashboard-table tbody tr:nth-child(even) {
+          background: none;
+        }
+
+        .dashboard-table tr:last-child td {
+          border-bottom: 0;
+        }
+
+        .dashboard-table-text {
+          font-size: 1rem;
+          font-weight: 400;
+          margin-bottom: 0;
+          margin-top: 0.5rem;
+        }
+
+        .dashboard-table-timestamp {
+          color: #9a9a9a;
+          font-size: 0.9rem;
+          font-weight: 400;
+        }
+
+        .dashboard-table-image {
+          display: inline;
+          margin-right: 1rem;
+          margin-top: 0.6rem;
+          max-width: none;
+        }
+
+
+        .foundation-5-top-bar {
+          background: #333;
+          color: #fefefe;
+        }
+
+        .foundation-5-top-bar .menu {
+          background: #333;
+        }
+
+        .foundation-5-top-bar .menu a {
+          color: #fefefe;
+        }
+
+        .foundation-5-top-bar .is-dropdown-submenu {
+          border: 0;
+        }
+
+        .foundation-5-top-bar .is-dropdown-submenu-item.opens-right a::after {
+          border-color: transparent transparent transparent #fefefe;
+        }
+
+        .foundation-5-top-bar .js-drilldown-back > a::before {
+          border-color: transparent #fefefe transparent transparent;
+        }
+
+        .foundation-5-top-bar .is-drilldown-submenu-parent > a::after {
+          border-color: transparent transparent transparent #fefefe;
+        }
+
+        .foundation-5-top-bar .dropdown.menu.medium-horizontal > li.is-dropdown-submenu-parent > a::after {
+          border-color: #fefefe transparent transparent;
+        }
+        </style>
+
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% block header %}
+            <div class="top-bar foundation-5-top-bar">
+                <div class="top-bar-title">
+                    <strong>Pharmacia</strong>
+                </div>
+                <div class="top-bar-left">
+                        <a href="{{path('paciente_index')}}">Pacientes</a>
+                        <a href="{{path('analisis_index')}}">Analisis</a>
+                    </div>
+                    <div class="top-bar-right">
+                        <ul class="menu">
+                            <li><form action="{{path('busqueda')}}" method="post" placeholder="Buscar"></li>
+                            <li><input type="text" name="busqueda" class="form-control" placeholder="Buscar"></li>
+                            <li><button type="submit" class="button">Buscar</button></li>                            
+                            <li></form></li>
+                        </ul>
+                    </div>
+                </div>
+        {%endblock%}
     </head>
+   
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block body %}
+        
+       
+    {% endblock %}
+        {% block javascripts%}
+        
+        {% endblock %}
     </body>
 </html>
